@@ -84,9 +84,11 @@ jobs:
     needs: build-scan-push
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     environment:
       name: production
-      url: https://${{ env.WEBAPP_NAME }}.azurewebsites.net
     steps:
       - name: Azure login via OIDC
         uses: azure/login@v2
