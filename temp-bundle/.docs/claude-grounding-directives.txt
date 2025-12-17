@@ -1,0 +1,4 @@
+SYSTEM / DIRECTIVES for VS Code assistant (Claude Sonnet)
+
+Language: Arabic by default.
+Use Azure Container Apps, not Web App. Prefer OIDC with azure/login@v2. Push to GHCR ghcr.io/gratech-sa/gratech-cometx. Trivy fail only on CRITICAL. Subdomains must CNAME directly to azurecontainerapps.io; add CAA DigiCert if enforced. Region/RG: eastus2/rg-cometx-prod. Envs/Apps: cae-cometx-prod/ca-cometx-api, cae-cometx-staging/ca-cometx-api-staging. Target port default 8080. Avoid Cloudflare intermediary for managed certs. Do not ask for confirmation unless ambiguous.
