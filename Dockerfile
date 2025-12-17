@@ -1,17 +1,18 @@
-﻿# Build stage
+﻿# ============ Build Stage ============
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm install --include=dev
 COPY . .
 RUN npm run build
 
-# Production stage
+# ============ Runtime Stage ============
 FROM node:20-alpine
 WORKDIR /app
-COPY package*.json ./
+ENV NODE_ENV=production
+COPY --from=builder /app/package*.json ./
 RUN npm install --omit=dev
 COPY --from=builder /app/dist ./dist
-COPY server.js ./
+COPY --from=builder /app/server.js ./server.js
 EXPOSE 8080
-CMD ["node", "server.js"]
+CMD ["node","server.js"]
