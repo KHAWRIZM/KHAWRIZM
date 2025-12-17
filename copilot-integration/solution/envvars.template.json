@@ -1,0 +1,8 @@
+{
+  "COMETX_API_HOST": "api.gratech.sa",
+  "COMETX_API_BASEPATH": "/api/v1",
+  "COMETX_API_KEY": "<paste-your-key>",
+  "COMETX_OAUTH_CLIENT_ID": "<client-id>",
+  "COMETX_OAUTH_TENANT_ID": "<tenant-id>",
+  "COMETX_OAUTH_SCOPE": "api://<app-id>/.default"
+}

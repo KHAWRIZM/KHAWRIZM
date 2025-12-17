@@ -1,0 +1,139 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "GraTech CometX API",
+    "version": "1.0.0",
+    "description": "Custom connector for CometX integration with Microsoft Copilot Studio."
+  },
+  "host": "api.gratech.sa",
+  "basePath": "/api/v1",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "X-API-Key",
+      "in": "header",
+      "x-ms-summary": "CometX API Key"
+    },
+    "oauth2": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/<tenant>/oauth2/v2.0/authorize",
+      "tokenUrl": "https://login.microsoftonline.com/<tenant>/oauth2/v2.0/token",
+      "scopes": {
+        "api://<app-id>/.default": "Access CometX API"
+      },
+      "x-ms-summary": "Azure AD OAuth 2.0"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "paths": {
+    "/status": {
+      "get": {
+        "operationId": "GetStatus",
+        "summary": "Get CometX health status",
+        "description": "Returns service health and build metadata.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "service": {
+                  "type": "string",
+                  "x-ms-summary": "Service name"
+                },
+                "version": {
+                  "type": "string",
+                  "x-ms-summary": "Version"
+                },
+                "time": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        },
+        "x-ms-visibility": "important"
+      }
+    },
+    "/tickets": {
+      "post": {
+        "operationId": "CreateTicket",
+        "summary": "Create support ticket",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "title",
+                "severity"
+              ],
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "x-ms-summary": "Title"
+                },
+                "severity": {
+                  "type": "string",
+                  "enum": [
+                    "Low",
+                    "Medium",
+                    "High",
+                    "Critical"
+                  ],
+                  "x-ms-summary": "Severity"
+                },
+                "details": {
+                  "type": "string",
+                  "x-ms-summary": "Details"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "x-ms-summary": "Ticket ID"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "created": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "x-ms-capabilities": {
+    "warnOnBreakingChange": true
+  }
+}

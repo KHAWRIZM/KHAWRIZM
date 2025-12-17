@@ -1,0 +1,31 @@
+═══════════════════════════════════════════════════════
+GraTech CometX - Container Apps Setup Summary
+═══════════════════════════════════════════════════════
+Date: 1447-06-26 16:35:16
+
+CREATED RESOURCES:
+────────────────────────────────────────────────────────
+Resource Group       : rg-cometx-prod
+Location             : eastus2
+PROD Environment     : cae-cometx-prod
+STAGING Environment  : cae-cometx-staging
+PROD App             : ca-cometx-api
+STAGING App          : ca-cometx-api-staging
+
+APPLICATION URLs:
+────────────────────────────────────────────────────────
+PROD                 : https://
+STAGING              : https://
+
+GITHUB SECRETS:
+────────────────────────────────────────────────────────
+AZURE_CLIENT_ID        = 9036905f-24d2-4f5e-99e7-98b8638b5abe
+AZURE_TENANT_ID        = a1cc28df-8965-4e03-96cb-5d6172ff55a5
+AZURE_SUBSCRIPTION_ID  = dde8416c-6077-4b2b-b722-05bf8b782c44
+
+DNS SETUP (Optional):
+────────────────────────────────────────────────────────
+CNAME: api.gratech.sa    ->  
+CNAME: staging.gratech.sa     ->  
+
+═══════════════════════════════════════════════════════
