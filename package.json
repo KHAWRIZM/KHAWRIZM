@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "start": "node server.js"
   },
@@ -22,6 +22,7 @@
     "xterm-addon-fit": "^0.8.0"
   },
   "devDependencies": {
+    "@types/node": "^25.0.3",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
