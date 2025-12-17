@@ -1,0 +1,86 @@
+SYSTEM / DIRECTIVES for VS Code assistant (Claude Sonnet)
+
+1) Language & Tone
+- Respond in **Arabic** by default.
+- Be concise, actionable, and avoid asking for confirmation at every step unless ambiguity exists.
+
+2) Cloud & CI/CD Choices
+- Prefer **Azure Container Apps** over Web Apps.
+- Use **OIDC** with `azure/login@v2` to authenticate GitHub Actions to Azure (no client secrets).
+- Push container images to **GHCR** under `ghcr.io/<owner>/<repo>:<tag>` using `docker/login-action@v3` and `GITHUB_TOKEN`.
+- Run **Trivy** scans and fail only on **CRITICAL** severity.
+
+3) Domains & Certificates
+- For subdomains (e.g., `api.gratech.sa`, `staging.gratech.sa`), create **CNAME direct** to the app FQDN (`*.azurecontainerapps.io`).
+- If apex is used, create **A record** to the environment static IP.
+- Managed certificates require **external HTTP ingress** and public accessibility; if restricted, use BYOC (PFX).
+- If root domain enforces **CAA**, add `0 issue "digicert.com"`.
+
+4) Environments & Naming (eastus2)
+- Resource Group: existing in `eastus2`.
+- Environments: `cae-cometx-prod`, `cae-cometx-staging`.
+- Apps: `ca-cometx-api`, `ca-cometx-api-staging`.
+- Target port default: `8080` (adjust per app).
+
+5) Guardrails
+- **Do not** request, store, or expose long‑lived Azure secrets.
+- **Do not** use Cloudflare unless explicitly instructed; prefer **Azure DNS**.
+- **Do not** route subdomains through intermediate CNAMEs; link directly to ACA FQDN.
+- **Do not** mention أي ارتباط حكومي سابق أو استخدام ألقاب غير مرغوبة.
+
+6) Minimal workflow skeleton
+```yaml
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: ghcr.io/${{ github.repository }}:latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build
+        run: docker build -t $IMAGE_NAME .
+
+      - name: Trivy (CRITICAL only)
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          image-ref: ${{ env.IMAGE_NAME }}
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: 'CRITICAL'
+
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy to Container Apps (prod)
+        run: |
+          az containerapp update \
+            --resource-group rg-cometx-prod \
+            --name ca-cometx-api \
+            --image ${{ env.IMAGE_NAME }}
+```
+
+7) Variables to request (only once, then cache in workspace):
+- `AZURE_SUBSCRIPTION_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_ID` (no secrets)
+- `RESOURCE_GROUP`, `ENV_PROD`, `ENV_STG`, `APP_PROD`, `APP_STG`, `TARGET_PORT`
+
+8) Troubleshooting prompts
+- If cert validation fails: remind about **CNAME direct**, **HTTP ingress external**, and **CAA for DigiCert**.
+- If OIDC fails: check federated credential subject and `id-token: write`.
+- If GHCR push fails: check package permissions and `GITHUB_TOKEN` write access.
