@@ -13,6 +13,6 @@ ENV NODE_ENV=production
 COPY --from=builder /app/package*.json ./
 RUN npm install --omit=dev
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/server.js ./server.js
+COPY --from=builder /app/server.cjs ./server.cjs
 EXPOSE 8080
 CMD ["node","server.cjs"]
