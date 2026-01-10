@@ -1,158 +1,60 @@
-# 🚀 GraTech CometX: AI-Powered Web Application & Azure CI/CD
-
 <div align="center">
-  <p>
-    Modern AI-powered web application with seamless Azure deployment. <br/>
-    تطبيق ويب حديث مدعوم بالذكاء الاصطناعي مع نشر سلس على Azure.
-  </p>
+
+![Khawrizm Banner](https://capsule-render.vercel.app/api?type=waving&color=00ffff&height=300&section=header&text=KHAWRIZM&fontSize=90&animation=fadeIn&fontAlignY=38&desc=The%20Human%20Engine%20%7C%20Sovereign%20Architect&descAlignY=51&descAlign=62)
+
+### 🦅 "They failed to bill me. Now they cannot stop me."
+### "فشلوا في محاسبتي.. والآن لن يستطيعوا إيقافي."
+
+![Billing Status](https://img.shields.io/badge/BILLING-FAILED_BUT_I_AM_ALIVE-ce0000?style=for-the-badge&logo=microsoft)
+![Cloud Status](https://img.shields.io/badge/CLOUD-BANNED-000000?style=for-the-badge&logo=azure)
+![Sovereignty](https://img.shields.io/badge/SOVEREIGNTY-100%25-00ffff?style=for-the-badge&logo=linux)
+
 </div>
 
-GraTech CometX is a cutting-edge web application designed for intelligence, efficiency, and scalability. It integrates advanced AI capabilities with a robust frontend, all underpinned by a secure and automated deployment pipeline to Microsoft Azure.
-
 ---
 
-## ✨ Features & Capabilities | الميزات والقدرات
+## 🏴 The Mission | المهمة
+I am an architect of **Local-First** technology.
+I build systems that run on **Your Hardware**, store data on **Your Disk**, and serve **Your Intelligence**.
+No subscriptions. No API keys. No hidden meters.
 
--   ⚡ **React + TypeScript + Vite:** Fast, modern, and type-safe frontend development.
--   🎨 **Tailwind CSS:** Beautiful, responsive, and highly customizable UI.
--   🤖 **Google Generative AI:** Integrated capabilities for intelligent interactions and content generation.
--   🐳 **Docker:** Containerized deployment for consistent environments across development and production.
--   ☁️ **Azure Ready:** One-command deployment to Azure Container Apps or Web Apps.
--   🔒 **OIDC Auth:** Secure, secretless authentication for CI/CD workflows using GitHub Actions.
--   🛡️ **Security First:** Automated security scanning (Trivy for containers, CodeQL for code analysis) integrated into the CI/CD pipeline.
--   🌐 **Multilingual Support:** Frontend designed with Arabic/English language toggling.
--   📊 **Rich UI:** Dynamic user interface with modules for Dashboard, Chat, Live Session, Orchestrator, IDE, App Factory, and Task Management.
+## ⚔️ The Sovereign Ecosystem | المنظومة السيادية
 
----
+| 🏰 **[THE BEACON](https://github.com/KHAWRIZM/THE-SOVEREIGN-BEACON)** | 🚀 **[COMET-X](https://github.com/KHAWRIZM/gratech-cometx)** | 🛡️ **[FORBIDDEN KILLERS](https://github.com/KHAWRIZM)** |
+| :--- | :--- | :--- |
+| **The Infrastructure** | **The Application** | **The Alliance** |
+| A complete local internet replacement. | AI-Powered Web App (Liberated from Azure). | The movement protecting the code. |
+| *Apache • No-IP • Brain V3* | *React • Local LLM • P2P* | *Security • Privacy • Zero-Trust* |
+| [🔴 LIVE STATUS](http://localhost/status.html) | [🟢 DEPLOYED](http://localhost:3000) | [⚫ CLASSIFIED]() |
 
-## 🎯 Project Overview & Achievements | نظرة عامة على المشروع والإنجازات
+## 🧠 The Stack (De-Clouded)
 
-GraTech CometX provides a strong foundation for an advanced AI-powered web application.
+We stripped the cloud out. We put the engine in.
 
-### Current Status:
-The project has achieved a high level of maturity in:
--   **Full-stack Development:** A dynamic React (TypeScript) frontend communicating with a Node.js backend (`server.cjs`).
--   **AI Integration:** Seamlessly uses Google Generative AI (`@google/genai`).
--   **Containerization:** Multi-stage Dockerfile ensures efficient, reproducible builds.
--   **Automated CI/CD:** Comprehensive GitHub Actions for building, scanning (Trivy, CodeQL), pushing to GHCR, and secure OIDC-authenticated deployment to Azure.
--   **Azure Infrastructure as Code:** `setup-azure.ps1` script automates Azure resource provisioning (App Registrations, Federated Credentials, Resource Groups, App Services).
--   **Rich Frontend Experience:** Modular UI supporting diverse views and functionalities.
+\\\mermaid
+graph LR
+    User[👤 YOU] -->|Owns| Hardware[💻 Local Machine]
+    Hardware -->|Runs| Beacon[🦅 The Sovereign Beacon]
+    Hardware -->|Runs| Comet[🚀 Comet-X App]
+    Beacon -->|Hosts| Files[📂 Sovereign Cloud]
+    Beacon -->|Broadcasts| Radio[📡 Free Radio]
+    Comet -->|Thinks via| Ollama[🧠 Local AI]
+    Cloud[☁️ AWS/Azure] -.->|Blocked| Firewall[🛡️ .00 Cost]
+    style Cloud fill:#f9f,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+    style Firewall fill:#ce0000,stroke:#ce0000,color:#fff
+\\\
 
-### Architectural Highlights:
-The application follows a modern modular single-page application architecture, deployed as a containerized service on Azure.
+## 📊 The Pulse | النبض
 
-```mermaid
-graph TD
-    User --> Frontend[React Frontend (Vite, TS, Tailwind)]
-    Frontend --> Backend[Node.js Backend (server.cjs)]
-    Backend --> GoogleAI[Google Generative AI]
-    Backend --> DataStore[(Optional) Data Storage]
-    
-    subgraph CI/CD & Deployment
-        GitHubRepo[GitHub Repository] --> GitHubActions[GitHub Actions]
-        GitHubActions --> DockerBuild[Docker Build & Scan (Trivy)]
-        DockerBuild --> GHCR[GitHub Container Registry]
-        GHCR --> AzureContainerApps[Azure Container Apps / Web Apps]
-        GitHubActions --> AzureOIDC[Azure OIDC (Secretless Auth)]
-    end
-
-    User --> AzureContainerApps
-    AzureContainerApps --> Monitoring[Azure Monitoring (Logs, Metrics)]
-```
-
----
-
-## 🏗️ Quick Start | بدء سريع
-
-### Local Development
-
-```bash
-# Install dependencies
-npm install
-
-# Start dev server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
-
-### Deploy to Azure
-
-For a complete deployment guide, refer to [DEPLOYMENT.md](DEPLOYMENT.md). The `setup-azure.ps1` script automates much of the Azure setup:
-
-```powershell
-# Login to Azure (if not already logged in)
-az login
-
-# Run the setup script from the project root
-.\setup-azure.ps1
-```
-
----
-
-## 🛠️ Tech Stack | حزمة التقنيات
-
--   **Frontend:** React 18, TypeScript, Vite
--   **Styling:** Tailwind CSS
--   **AI:** Google Generative AI (`@google/genai`)
--   **Backend (implied):** Node.js with Express.js (via `server.cjs`)
--   **Advanced UI Components:** Monaco Editor (for IDE), XTerm.js (for Terminal), Chart.js, Recharts (for Data Visualization).
--   **Deployment:** Docker, Azure Web Apps/Container Apps, GitHub Actions.
-
----
-
-## 📚 Documentation & Guides | الوثائق والأدلة
-
--   [**CI-CD-GUIDE.md**](CI-CD-GUIDE.md): Detailed setup for GitHub Actions, OIDC, and security scanning.
--   [**DEPLOYMENT.md**](DEPLOYMENT.md): Comprehensive guide for deploying to Azure.
--   [**QUICKSTART.md**](QUICKSTART.md): Concise guide for CI/CD on Azure Container Apps.
-
----
-
-## 🤝 Contributing | المساهمة
-
-We welcome contributions! Please fork the repository, create a feature branch, commit your changes, and open a Pull Request.
-
-1.  Fork the repository
-2.  Create feature branch (`git checkout -b feature/your-feature-name`)
-3.  Commit changes (`git commit -m 'feat: Add amazing feature'`)
-4.  Push to branch (`git push origin feature/your-feature-name`)
-5.  Open a Pull Request
-
----
-
-## 🛣️ Remaining & Future Work | العمل المتبقي والمستقبلي
-
-While a strong foundation is established, potential areas for further development include:
-
--   **Full Backend Implementation:** Expanding the functionality and scope of `server.cjs`.
--   **Advanced AI Features:** Deeper integration and fine-tuning of Google Generative AI for specific use cases.
--   **Comprehensive UX/UI Refinements:** Enhancing the Orchestrator, IDE, and App Factory modules.
--   **Scalability & Observability:** Implementing advanced Azure monitoring (e.g., Application Insights) and auto-scaling.
--   **Application-level User Management:** Integrating robust authentication and authorization within the application.
--   **Expanded Test Suite:** Developing comprehensive unit, integration, and end-to-end tests.
-
----
-
-## 📜 License
-
-© 2024 GraTech AI. All rights reserved.
-
----
-
-## 🔗 Links
-
--   🌐 **Website:** [https://gratech.sa](https://gratech.sa)
--   📧 **Email:** [support@gratech.sa](mailto:support@gratech.sa)
--   📦 **GitHub Organization:** [https://github.com/gratech-sa/gratech-cometx](https://github.com/gratech-sa/gratech-cometx) (Original source)
-    *   *Note: This repository is now maintained by @KHAWRIZM.*
+<div align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=KHAWRIZM&show_icons=true&theme=radical&hide_border=true&bg_color=0a0a0a&title_color=00ffff&icon_color=e5e4e2&text_color=fff" height="170" alt="stats" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=KHAWRIZM&layout=compact&theme=radical&hide_border=true&bg_color=0a0a0a&title_color=00ffff&text_color=fff" height="170" alt="langs" />
+</div>
 
 ---
 
 <div align="center">
-  <p>Built with ❤️ by GraTech AI Team | بُنيت بحب بواسطة فريق GraTech AI</p>
+  <a href="https://github.com/KHAWRIZM/THE-SOVEREIGN-BEACON">
+    <img src="https://img.shields.io/badge/JOIN-THE_RESISTANCE-00ffff?style=for-the-badge" />
+  </a>
 </div>
